@@ -107,7 +107,7 @@ const App = () => {
           </label>
 
           <br></br>
-          <button onClick={handlePost}>Insert Data</button>
+          <button onClick={handlePost}>Add</button>
 
           <div>
             <h3>Response</h3>

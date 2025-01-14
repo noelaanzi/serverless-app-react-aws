@@ -1,132 +1,120 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const App = () => {
-  // State for GET response
-  const [customerId, setCustomerId] = useState("");
-  const [getResponse, setGetResponse] = useState(null);
+  const [response, setResponse] = useState(null);
+  const [customerId, setQuery] = useState('');
 
-  // State for POST form inputs and response
-  const [postData, setPostData] = useState({ name: "", email: "", age: "" });
-  const [postResponse, setPostResponse] = useState(null);
+  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [responseData, setResponseData] = useState(null);
 
-  // AWS API Gateway base URL
-  const API_BASE_URL = "https://YOUR_API_ENDPOINT";
+  const apiUrl = `https://m8ckvzjzi5.execute-api.ap-northeast-1.amazonaws.com/dev/customer`;
 
-  // Handle input changes
-  const handleInputChanges = (e) => {
-    setCustomerId(e.target.value);
-  };
-
-  // Handle GET request
-  const handleGetRequest = async () => {
-    try {
-      const queryParams = { id: customerId, filter: "active" }; // Example query params
-      const response = await axios.get(`${API_BASE_URL}/get-endpoint`, {
-        params: queryParams,
-      });
-      setGetResponse(response.data);
-    } catch (error) {
-      console.error("Error in GET request:", error);
-    }
-  };
-
-  // Handle POST request
-  const handlePostRequest = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(`${API_BASE_URL}/post-endpoint`, postData);
-      setPostResponse(response.data);
-    } catch (error) {
-      console.error("Error in POST request:", error);
-    }
-  };
-
-  // Handle form input changes
-  const handleInputChange = (e) => {
+  // Handle form input change
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setPostData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [name]: value });
+  };
+
+
+  const getData = async () => {
+    try {
+      const result = await axios.get(apiUrl, {
+        params: { CustomerId: customerId }, // Add query parameters here
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      setResponse(result.data);
+    } catch (error) {
+      console.error('Error calling API:', error);
+      setResponse(error.response?.data || 'Error occurred');
+    }
+  };
+
+
+  // Call POST API to insert data
+  const handlePost = async () => {
+    try {
+      const response = await axios.post(apiUrl, formData, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      setResponseData(response.data);
+    } catch (error) {
+      console.error("Error posting data:", error);
+      setResponseData(error.response?.data || 'Error occurred');
+    }
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>AWS API Gateway Integration</h1>
-
-      {/* GET Request Section */}
-      <div>
-        <h2>GET Request</h2>
-        {/* Input Field */}
+    <div>
+      <div style={{ padding: "20px" }}>
+        <h1>React + Serverless Application in AWS </h1>
+        <h2>View Customer</h2>
         <div style={{ marginBottom: "20px" }}>
           <label>
-            Enter Customer Id:
+            Customer Id
             <input
               type="text"
               value={customerId}
-              onChange={handleInputChanges}
+              onChange={(e) => setQuery(e.target.value)}
               style={{ marginLeft: "10px", padding: "5px" }}
             />
           </label>
+          <button onClick={getData}>Search</button>
+          <div>
+            <h3>Response:</h3>
+            <pre>{JSON.stringify(response, ' ', 2)}</pre>
+          </div>
         </div>
-
-        <button onClick={handleGetRequest}>Fetch Data</button>
-        {getResponse && (
-          <div>
-            <h3>GET All Response:</h3>
-            <pre>{JSON.stringify(getResponse, null, 2)}</pre>
-          </div>
-        )}
       </div>
-
       <hr />
-
-      {/* POST Request Section */}
       <div>
-        <h2>POST Request</h2>
-        <form onSubmit={handlePostRequest}>
+        <div style={{ padding: "20px" }}>
+          <h2>Add New Customer</h2>
+          <label>
+            Customer Id:{" "}
+            <input
+              type="text"
+              name="customerId"
+              value={formData.customerId}
+              onChange={handleChange}
+              style={{ marginLeft: "10px", padding: "5px" }}
+            />
+          </label>
+          <br></br>
+          <label>
+            Name:{" "}
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              style={{ marginLeft: "10px", padding: "5px" }}
+            />
+          </label>
+          <br></br>
+          <label>
+            Email:{" "}
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              style={{ marginLeft: "10px", padding: "5px" }}
+            />
+          </label>
+
+          <br></br>
+          <button onClick={handlePost}>Insert Data</button>
+
           <div>
-            <label>
-              Name:{" "}
-              <input
-                type="text"
-                name="name"
-                value={postData.name}
-                onChange={handleInputChange}
-              />
-            </label>
+            <h3>Response</h3>
+            <pre>{JSON.stringify(responseData, '', 2)}</pre>
           </div>
-          <div>
-            <label>
-              Email:{" "}
-              <input
-                type="email"
-                name="email"
-                value={postData.email}
-                onChange={handleInputChange}
-              />
-            </label>
-          </div>
-          <div>
-            <label>
-              Age:{" "}
-              <input
-                type="number"
-                name="age"
-                value={postData.age}
-                onChange={handleInputChange}
-              />
-            </label>
-          </div>
-          <button type="submit">Submit Data</button>
-        </form>
-        {postResponse && (
-          <div>
-            <h3>POST Response:</h3>
-            <pre>{JSON.stringify(postResponse, null, 2)}</pre>
-          </div>
-        )}
+
+        </div>
       </div>
     </div>
   );

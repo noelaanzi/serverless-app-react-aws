@@ -5,22 +5,22 @@ const App = () => {
   const [response, setResponse] = useState(null);
   const [customerId, setQuery] = useState('');
 
-  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [formData, setFormData] = useState({ id: '', name: '', email: '' });
   const [responseData, setResponseData] = useState(null);
 
   const apiUrl = `https://m8ckvzjzi5.execute-api.ap-northeast-1.amazonaws.com/dev/customer`;
 
-  // Handle form input change
+  // Handle form input data
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-
+  // Call GET API mehtod to retrieve data
   const getData = async () => {
     try {
       const result = await axios.get(apiUrl, {
-        params: { CustomerId: customerId }, // Add query parameters here
+        params: { CustomerId: customerId }, // Pass query parameter 
         headers: {
           'Content-Type': 'application/json',
         },
@@ -34,7 +34,7 @@ const App = () => {
   };
 
 
-  // Call POST API to insert data
+  // Call POST method to insert data
   const handlePost = async () => {
     try {
       const response = await axios.post(apiUrl, formData, {
@@ -50,7 +50,7 @@ const App = () => {
   return (
     <div>
       <div style={{ padding: "20px" }}>
-        <h1>React + Serverless Application in AWS </h1>
+        <h1>React - Serverless Application In AWS </h1>
         <h2>View Customer</h2>
         <div style={{ marginBottom: "20px" }}>
           <label>
@@ -77,8 +77,8 @@ const App = () => {
             Customer Id:{" "}
             <input
               type="text"
-              name="customerId"
-              value={formData.customerId}
+              name="id"
+              value={formData.id}
               onChange={handleChange}
               style={{ marginLeft: "10px", padding: "5px" }}
             />

@@ -8,7 +8,8 @@ const App = () => {
   const [formData, setFormData] = useState({ id: '', name: '', email: '' });
   const [responseData, setResponseData] = useState(null);
 
-  const apiUrl = `https://m8ckvzjzi5.execute-api.ap-northeast-1.amazonaws.com/dev/customer`;
+  // Add [apiUrl] with your API Gateway URL
+  const apiUrl = ``;
 
   // Handle form input data
   const handleChange = (e) => {

@@ -65,8 +65,16 @@ The below AWS services are used for this project:
 ### 2.3
 - React App
   - Query and insert customer information through HTTP requests
-  - Run React App locally from VS Code
-(Steps available in <README.md> file in GitHub repository)
+  - Steps to run React App locally from VS Code
+    * Afther repository is cloned locally as menntioned in [#### 1.3- Clone the repository to local]
+    - Open the folder in VS code
+    - Open Terminal
+    - The [node_modules] folder may be missing which is usually excluded while uploading to GitHub repository
+    - 2.3.1. Run below command to install Node modules  
+             - npm install
+    - 2.3.2  Run the build command to build the app
+            - npm run build
+          
 
 
         

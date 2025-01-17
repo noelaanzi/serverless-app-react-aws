@@ -1,71 +1,102 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 # serverless-app-react-aws
+React App for serverless application in AWS
+
+## Table of Contents
+1. [About](#about)
+2. [Getting Started](#getting-started)
+3. [Contact](#contact)
+
+## About
+This project builds a React App for querying and inserting customer information to DynamoDB table.
+This App will invoke AWS API Gateway GET and POST method for the query and data insertion.
+The below AWS services are used for this project:
+  AWS API Gateway - REST API
+  AWS Lambda (Python)
+  AWS DynamoDB
+  
+## Getting Started
+### Prerequisites
+### 1.0
+- AWS Account
+  - Create a Free tier account
+  - URL: https://signin.aws.amazon.com/signup?request_type=register
+
+- IAM User & Permissions
+  - IAM user Assign required privileges to IAM user
+  - Login as IAM user and not as root user to avoid potential security issues(Recommended)
+### 1.1
+- Installation on Local Machine
+  - Node.js
+    - Download URL: https://nodejs.org/en
+  - Visual Studio Code
+    - Download URL: https://code.visualstudio.com/
+#### 1.2  
+- Git Installation
+  - Dwonload Link: https://git-scm.com/downloads
+#### 1.3
+- Clone the repository to local
+    - React : git clone https://github.com/noelaanzi/serverless-app-react-aws.git
+    - The Lambda fucntion python code <serverless-dynamodb-.py> is available in the below repository,
+      you can just copy and use it as per your convenience.
+    - Python: git clone https://github.com/noelaanzi/aws-lambda-dynamodb-python.git
+
+### Steps
+### 2.0
+- Amazon DynamoDB
+  - Create DynamoDB from AWS console
+    - Table Name: [customer]   
+    - Items : CustomerId,Name,Email 
+    - For detailed tutorial please watch the video from below link:
+      - YouTube Tutorial: AWS DynamoDB Tutorial | NoSQL Database
+      - YouTube Link: https://youtu.be/pYT916ddW5s
+
+ ### 2.1 
+ - AWS Lambda
+   - From AWS console create a Lambda Function to query and insert data to DynamoDB
+     - YouTube Tutorial: AWS Lambda Tutorial | Beginner - Advanced
+     - YouTube Link: https://youtu.be/La8uu9CHRIA
+
+### 2.2
+- AWS API Gateway
+  - Create a new API Gateway API from AWS console to interact with React App and Lambda
+  - YouTube Tutorial: AWS API Gateway - Lambda Integration Tutorial
+  - YouTube Link: https://youtu.be/kv63fQiaPT0
+
+### 2.3
+- React App
+  - Query and insert customer information through HTTP requests
+  - Run React App locally from VS Code
+(Steps available in <README.md> file in GitHub repository)
+
+
+        
+### 2.4
+- Deploy Azure function to Azure Function App
+- Open the project in VS code which you cloned in ( ### Prerequisites, #### 1.4)
+- Deploy the function to Azure Function App created in ( ### Steps, ### 2.2 )
+- For creating & deploying Azure Function App please watch the video from below link:
+  - https://youtu.be/kVO6KkDwKRg
+### 2.5
+- Create API in API Management
+- For creating & deploying Azure API Management API please watch the video from below link:
+  - https://youtu.be/XkPXJTbsg2A
+ 
+### 2.6
+- Test Azure API Management API in Postman
+  - For [POST] method to insert data to DB, pass JSON data in below format:
+       {
+       "FirstName":"YourFirstName",
+       "LastName":"YourLastName",
+       "Email":"s123dummy@gmail.com"
+      }
+  - For [GET] method to retrieve data from DB        
+    - Input -> pass query parameter id=<value> e.g. id=1 
+    
+## Contact
+- Name: Arockiadoss Jesudoss
+- GitHub: https://github.com/noelaanzi
+- Linkedin: www.linkedin.com/in/arockiadoss-4756a4145
+- YouTube: https://www.youtube.com/@IT-SkilL-MasteR
+- Facebook: https://www.facebook.com/Arockiadoss.sna/
+- Instagram : https://www.instagram.com/arockiadoss_sna/?hl=en
+

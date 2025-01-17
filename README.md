@@ -80,6 +80,7 @@ The below AWS services are used for this project:
              - serve -s build
              - The above command will produce the below output
                copy and enter the local URL [http://localhost:3000] in the browser, which will open the React App
+      
                ┌─────────────────────────────────────────┐
                │                                         │
                │   Serving!                              │

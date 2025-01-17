@@ -1,5 +1,5 @@
 # serverless-app-react-aws
-React App for serverless application in AWS
+Serverless application in AWS 
 
 ## Table of Contents
 1. [About](#about)
@@ -72,33 +72,32 @@ The below AWS services are used for this project:
     - The [node_modules] folder may be missing which is usually excluded while uploading to GitHub repository
     - 2.3.1. Run below command to install Node modules  
              - npm install
-    - 2.3.2  Run the build command to build the app
+    - 2.3.2. Run the build command to build the app
             - npm run build
+    - 2.3.2. Run the commands to serve the files using a local HTTP server
+             - npm install -g serve
+    - 2.3.3. Run the command for serving production build
+             - serve -s build
+             - The above command will produce the below output
+               copy and enter the local URL [http://localhost:3000] in the browser, which will open the React App
+               ┌─────────────────────────────────────────┐
+               │                                         │
+               │   Serving!                              │
+               │                                         │
+               │   - Local:    http://localhost:3000     │
+               │   - Network:  http://192.168.3.2:3000   │
+               │                                         │
+               │   Copied local address to clipboard!    │
+               │                                         │
+               └─────────────────────────────────────────┘
           
-
-
-        
 ### 2.4
-- Deploy Azure function to Azure Function App
-- Open the project in VS code which you cloned in ( ### Prerequisites, #### 1.4)
-- Deploy the function to Azure Function App created in ( ### Steps, ### 2.2 )
-- For creating & deploying Azure Function App please watch the video from below link:
-  - https://youtu.be/kVO6KkDwKRg
-### 2.5
-- Create API in API Management
-- For creating & deploying Azure API Management API please watch the video from below link:
-  - https://youtu.be/XkPXJTbsg2A
- 
-### 2.6
-- Test Azure API Management API in Postman
-  - For [POST] method to insert data to DB, pass JSON data in below format:
-       {
-       "FirstName":"YourFirstName",
-       "LastName":"YourLastName",
-       "Email":"s123dummy@gmail.com"
-      }
-  - For [GET] method to retrieve data from DB        
-    - Input -> pass query parameter id=<value> e.g. id=1 
+- Clean up Resources
+  - Delete Amazon DynamoDB
+  - Delete CloudWatch Logs
+  - Delete IAM Roles
+  - Delete Lambda Function
+  - Delete API Gateway
     
 ## Contact
 - Name: Arockiadoss Jesudoss

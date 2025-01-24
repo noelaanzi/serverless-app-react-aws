@@ -53,7 +53,7 @@ The below AWS services are used for this project:
  ### 2.1 
  - AWS Lambda
    - From AWS console create a Lambda Function to query and insert data to DynamoDB
-     - YouTube Tutorial: AWS Lambda Tutorial | Beginner - Advanced
+     - YouTube Tutorial: AWS Lambda Tutorial | Python
      - YouTube Link: https://youtu.be/La8uu9CHRIA
 
 ### 2.2

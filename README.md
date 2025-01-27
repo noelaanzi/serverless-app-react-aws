@@ -61,6 +61,8 @@ The below AWS services are used for this project:
   - Create a new API Gateway API from AWS console to interact with React App and Lambda
   - YouTube Tutorial: AWS API Gateway - Lambda Integration Tutorial
   - YouTube Link: https://youtu.be/kv63fQiaPT0
+  - YouTube Tutorial: AWS API Gateway – Lambda Proxy vs Non-Proxy Integration with Python
+  - YouTube Link: https://youtu.be/HrszWYar65M    
 
 ### 2.3
 - React App

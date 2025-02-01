@@ -5,11 +5,12 @@ const App = () => {
   const [response, setResponse] = useState(null);
   const [customerId, setQuery] = useState('');
 
-  const [formData, setFormData] = useState({ Name: '', Email: '' });
+  const [formData, setFormData] = useState({ id: '', name: '', email: '' });
   const [responseData, setResponseData] = useState(null);
 
   // Add [apiUrl] with your API Gateway URL
-  const apiUrl = '';
+  const apiUrl = `https://8dw4uwxsvb.execute-api.ap-northeast-1.amazonaws.com/dev/customer`;
+
   // Handle form input data
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,9 +21,9 @@ const App = () => {
   const getData = async () => {
     try {
       const result = await axios.get(apiUrl, {
-        params: { id: customerId }, // Pass query parameter 
+        params: { CustomerId: customerId }, // Pass query parameter 
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
       });
 
@@ -38,7 +39,7 @@ const App = () => {
   const handlePost = async () => {
     try {
       const response = await axios.post(apiUrl, formData, {
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
       });
       setResponseData(response.data);
     } catch (error) {
@@ -74,11 +75,22 @@ const App = () => {
         <div style={{ padding: "20px" }}>
           <h2>Add New Customer</h2>
           <label>
+            Customer Id:{" "}
+            <input
+              type="text"
+              name="id"
+              value={formData.id}
+              onChange={handleChange}
+              style={{ marginLeft: "10px", padding: "5px" }}
+            />
+          </label>
+          <br></br>
+          <label>
             Name:{" "}
             <input
               type="text"
-              name="Name"
-              value={formData.Name}
+              name="name"
+              value={formData.name}
               onChange={handleChange}
               style={{ marginLeft: "10px", padding: "5px" }}
             />
@@ -88,8 +100,8 @@ const App = () => {
             Email:{" "}
             <input
               type="email"
-              name="Email"
-              value={formData.Email}
+              name="email"
+              value={formData.email}
               onChange={handleChange}
               style={{ marginLeft: "10px", padding: "5px" }}
             />
